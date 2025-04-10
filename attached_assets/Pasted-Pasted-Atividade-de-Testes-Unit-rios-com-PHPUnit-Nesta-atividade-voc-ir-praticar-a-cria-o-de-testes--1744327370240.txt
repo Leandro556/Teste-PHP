@@ -1,0 +1,69 @@
+Pasted-Atividade-de-Testes-Unit-rios-com-PHPUnit-Nesta-atividade-voc-ir-praticar-a-cria-o-de-testes-un-1744325482449.txt
+Atividade de Testes Unitários com PHPUnit
+Nesta atividade, você irá praticar a criação de testes unitários utilizando o
+framework PHPUnit, amplamente utilizado em projetos PHP. O objetivo é
+entender a importância dos testes unitários e como eles ajudam a garantir a
+qualidade do código desde as primeiras etapas do desenvolvimento.
+Objetivos
+- Compreender o conceito de testes unitários.
+- Escrever testes para funções puras em PHP.
+- Identificar e tratar casos de borda e falhas em funções simples.
+- Utilizar o PHPUnit para automatizar os testes.
+Estrutura do Projeto
+Você trabalhará com um pequeno projeto com a seguinte estrutura de pastas e
+arquivos:
+testes-aula/
+├── src/
+│ └── Funcoes.php
+└── tests/
+ └── FuncoesTest.php
+Código Fonte: src/Funcoes.php
+<?php
+class Funcoes
+{
+ public static function isEven($n)
+ {
+ return $n % 2 === 0;
+ }
+ public static function factorial($n)
+ {
+ if ($n < 0) {
+ throw new InvalidArgumentException("Negative
+number not allowed");
+ }
+ return $n === 0 ? 1 : $n * self::factorial($n - 1);
+ }
+ public static function isPalindrome($str)
+ {
+ $str = strtolower(preg_replace('/[^a-z0-9]/i', '',
+$str));
+ return $str === strrev($str);
+ }
+ public static function fahrenheitToCelsius($f)
+ {
+ return ($f - 32) * 5 / 9;
+ }
+ public static function calculateDiscount($price,
+$percent)
+ {
+ if ($price < 0 || $percent < 0) {
+ throw new InvalidArgumentException("Negative
+values not allowed");
+ }
+ return $price - ($price * $percent / 100);
+ }
+}
+Tarefa dos Estudantes
+- Analisar o código das funções disponíveis em `Funcoes.php`.
+- Criar testes unitários em `tests/FuncoesTest.php`, utilizando o PHPUnit.
+- Para cada função, escreva ao menos:
+ * Um teste com comportamento esperado;
+ * Um teste de entrada inválida (se aplicável);
+- Executar os testes utilizando o comando:
+ `./vendor/bin/phpunit tests`
+- Documentar os resultados
+Reflexão Final
+Após a execução da atividade, reflita sobre as seguintes questões:
+- Os testes ajudaram a identificar comportamentos inesperados?
+- Algum teste falhou? Por quê?
+- Como os testes podem ajudar na evolução segura do código?
