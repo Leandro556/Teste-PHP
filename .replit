@@ -1,0 +1,51 @@
+modules = ["php", "php-8.2"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "PHPUnit Tests"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "php-unit-testing"
+
+[[workflows.workflow]]
+name = "PHPUnit Tests"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "composer install && ./vendor/bin/phpunit tests"
+
+[[workflows.workflow]]
+name = "php-unit-testing"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "composer install && vendor/bin/phpunit tests"
+
+[deployment]
+run = ["sh", "-c", "composer install && ./vendor/bin/phpunit tests"]
